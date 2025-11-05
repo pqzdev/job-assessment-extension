@@ -34,7 +34,7 @@ const ASSESSMENT_PROMPT = `I found this job opportunity. Please assess it agains
 
 6. **Red Flags**: Any concerns about the role, company, or job description?
 
-7. **Tailored Documents**: If I should apply, please produce:
+7. **Tailored Documents**: ONLY if you recommend I apply, please produce:
    - A tailored CV highlighting the most relevant experience and skills for this role (following the project's CV format and instructions)
    - A compelling cover letter that addresses the key requirements and demonstrates my fit (following the project's cover letter guidelines)
 
