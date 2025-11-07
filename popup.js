@@ -20,23 +20,23 @@ const JOB_SELECTORS = {
   }
 };
 
-const ASSESSMENT_PROMPT = `I found this job opportunity. Please assess it against my background and experience:
+const ASSESSMENT_PROMPT = `Assess this job opportunity against my background:
 
-1. **Match Assessment**: How well does this role align with my skills, experience, and career goals? (Give a percentage match and brief explanation)
+**INITIAL SCREENING (always provide):**
+1. **Match Score**: Give a percentage (0-100%) and 1-2 sentence explanation
+2. **Quick Decision**: APPLY / MAYBE / SKIP - with brief reason
+3. **Red Flags**: Any immediate concerns (or "None")
 
-2. **Key Strengths**: Which aspects of my background make me a strong candidate?
+**DETAILED ANALYSIS (only if Match Score ≥ 60%):**
+4. **Key Strengths**: Top 3-5 relevant qualifications I have
+5. **Gaps**: Missing requirements and whether they're deal-breakers
+6. **Compensation**: Expected salary range
+7. **Application Angle**: Strategy for cover letter/CV focus
 
-3. **Potential Gaps**: What requirements might I not fully meet? Are these deal-breakers or manageable gaps?
-
-4. **Compensation Estimate**: Based on the role and my experience, what salary range should I expect/target?
-
-5. **Application Strategy**: Should I apply? If yes, what angle should I take in my cover letter and CV tailoring?
-
-6. **Red Flags**: Any concerns about the role, company, or job description?
-
-7. **Tailored Documents**: ONLY if you recommend I apply, please produce:
-   - A tailored CV highlighting the most relevant experience and skills for this role (following the project's CV format and instructions)
-   - A compelling cover letter that addresses the key requirements and demonstrates my fit (following the project's cover letter guidelines)
+**NEXT STEPS (only if recommending APPLY):**
+8. Offer to create tailored CV (exactly 2 pages, Google Doc format) and cover letter
+9. Wait for my confirmation before proceeding
+10. After creating documents, explicitly confirm: "✓ CV is exactly 2 pages in Google Doc format"
 
 ---
 
