@@ -36,7 +36,8 @@ const ASSESSMENT_PROMPT = `Assess this job opportunity against my background:
 **NEXT STEPS (only if recommending APPLY):**
 8. Offer to create tailored CV (1.6-2.1 pages, Google Doc format) and cover letter
 9. Wait for my confirmation before proceeding
-10. After creating documents:
+10. When creating CV, include contact details at the top: {{CONTACT_DETAILS}}
+11. After creating documents:
     - CRITICAL: Re-read your entire output to verify it sounds natural and professional
     - Remove any AI-sounding phrases, generic fluff, or obvious template language
     - Ensure all achievements are specific and quantified where possible
@@ -74,8 +75,22 @@ async function extractAndCopy(button, originalButtonText) {
       throw new Error('Could not find job description on this page');
     }
 
+    // Get contact details from storage
+    const { userEmail, userPhone } = await chrome.storage.local.get(['userEmail', 'userPhone']);
+
+    // Build contact details string
+    let contactDetails = '';
+    if (userEmail || userPhone) {
+      const details = [];
+      if (userEmail) details.push(`Email: ${userEmail}`);
+      if (userPhone) details.push(`Phone: ${userPhone}`);
+      contactDetails = details.join(' | ');
+    } else {
+      contactDetails = '(Contact details from your CV knowledge)';
+    }
+
     // Format the complete text to copy
-    let textToCopy = ASSESSMENT_PROMPT;
+    let textToCopy = ASSESSMENT_PROMPT.replace('{{CONTACT_DETAILS}}', contactDetails);
 
     if (jobData.title) {
       textToCopy += `**Title:** ${jobData.title}\n`;
