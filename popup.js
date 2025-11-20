@@ -159,17 +159,26 @@ document.getElementById('extractBtn').addEventListener('click', async () => {
   await extractAndCopy(button, originalText);
 });
 
-// Load saved project ID on popup open
+// Load saved settings on popup open
 document.addEventListener('DOMContentLoaded', async () => {
-  const { claudeProjectId } = await chrome.storage.local.get('claudeProjectId');
+  const { claudeProjectId, userEmail, userPhone } = await chrome.storage.local.get(['claudeProjectId', 'userEmail', 'userPhone']);
+
   if (claudeProjectId) {
     document.getElementById('projectIdInput').value = claudeProjectId;
   }
+  if (userEmail) {
+    document.getElementById('emailInput').value = userEmail;
+  }
+  if (userPhone) {
+    document.getElementById('phoneInput').value = userPhone;
+  }
 });
 
-// Save project ID
+// Save project ID, email, and phone
 document.getElementById('saveBtn').addEventListener('click', async () => {
   const projectId = document.getElementById('projectIdInput').value.trim();
+  const email = document.getElementById('emailInput').value.trim();
+  const phone = document.getElementById('phoneInput').value.trim();
   const status = document.getElementById('status');
 
   if (!projectId) {
@@ -178,10 +187,14 @@ document.getElementById('saveBtn').addEventListener('click', async () => {
     return;
   }
 
-  await chrome.storage.local.set({ claudeProjectId: projectId });
+  await chrome.storage.local.set({
+    claudeProjectId: projectId,
+    userEmail: email,
+    userPhone: phone
+  });
 
   status.className = 'status success';
-  status.textContent = '✓ Project ID saved!';
+  status.textContent = '✓ Settings saved!';
 
   setTimeout(() => {
     status.textContent = '';
