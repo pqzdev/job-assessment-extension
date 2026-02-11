@@ -20,29 +20,21 @@ const JOB_SELECTORS = {
   }
 };
 
-const ASSESSMENT_PROMPT = `Assess this job opportunity against my background:
+const ASSESSMENT_PROMPT = `Assess this job opportunity:
 
-**INITIAL SCREENING (always provide):**
-1. **Match Score**: Give a percentage (0-100%) and 1-2 sentence explanation
-2. **Quick Decision**: APPLY / MAYBE / SKIP - with brief reason
-3. **Red Flags**: Any immediate concerns (or "None")
+**ASSESSMENT:**
+- Match Score: X% - brief explanation
+- Decision: APPLY / MAYBE / SKIP - why
+- Key Strengths: 3-5 relevant qualifications I have
+- Gaps: Any deal-breakers or concerns
+- Salary Expectation: Range based on role/location
 
-**DETAILED ANALYSIS (only if Match Score ≥ 60%):**
-4. **Key Strengths**: Top 3-5 relevant qualifications I have
-5. **Gaps**: Missing requirements and whether they're deal-breakers
-6. **Compensation**: Expected salary range
-7. **Application Angle**: Strategy for cover letter/CV focus
+**IF APPLY: Offer to create:**
+- Tailored CV (2 pages max, nothing fabricated)
+- Cover letter (1 page max)
+- Contact details for CV: {{CONTACT_DETAILS}}
 
-**NEXT STEPS (only if recommending APPLY):**
-8. Offer to create tailored CV (1.6-2.1 pages, Google Doc format) and cover letter
-9. Wait for my confirmation before proceeding
-10. When creating CV, include contact details at the top: {{CONTACT_DETAILS}}
-11. After creating documents:
-    - CRITICAL: Re-read your entire output to verify it sounds natural and professional
-    - Remove any AI-sounding phrases, generic fluff, or obvious template language
-    - Ensure all achievements are specific and quantified where possible
-    - Check that the tone is confident but authentic
-    - Confirm: "✓ CV is between 1.6-2.1 pages in Google Doc format and reviewed for quality"
+Wait for confirmation before creating documents. When creating, write naturally - no AI fluff, quantify achievements, authentic tone.
 
 ---
 
